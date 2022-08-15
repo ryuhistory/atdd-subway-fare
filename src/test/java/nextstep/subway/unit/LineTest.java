@@ -18,13 +18,15 @@ class LineTest {
 	Station 강남역;
 	Station 역삼역;
 	Station 삼성역;
+
 	@BeforeEach
 	void setUp() {
-		line = new Line("2호선", "green");
+		line = new Line("2호선", "green", false);
 		강남역 = new Station("강남역");
 		역삼역 = new Station("역삼역");
 		삼성역 = new Station("삼성역");
 	}
+
 	@Test
 	void addSection() {
 		line.addSection(강남역, 역삼역, 10, 3);

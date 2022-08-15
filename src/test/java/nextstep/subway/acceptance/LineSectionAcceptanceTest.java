@@ -135,6 +135,7 @@ class LineSectionAcceptanceTest extends AcceptanceTest {
 		lineCreateParams.put("downStationId", downStationId + "");
 		lineCreateParams.put("distance", 10 + "");
 		lineCreateParams.put("distance", 3 + "");
+		lineCreateParams.put("isAdditionalFeeLine", "false");
 		return lineCreateParams;
 	}
 
