@@ -15,6 +15,7 @@ public class Line {
 	private Long id;
 	private String name;
 	private String color;
+	private boolean isAdditionalFeeLine;
 
 	@Embedded
 	private Sections sections = new Sections();
@@ -22,7 +23,7 @@ public class Line {
 	public Line() {
 	}
 
-	public Line(String name, String color) {
+	public Line(String name, String color, boolean isAdditionalFeeLine) {
 		this.name = name;
 		this.color = color;
 	}
@@ -43,12 +44,15 @@ public class Line {
 		return sections.getSections();
 	}
 
-	public void update(String name, String color) {
+	public void update(String name, String color, Boolean isAdditionalFeeLine) {
 		if (name != null) {
 			this.name = name;
 		}
 		if (color != null) {
 			this.color = color;
+		}
+		if (isAdditionalFeeLine != null) {
+			this.isAdditionalFeeLine = isAdditionalFeeLine;
 		}
 	}
 
