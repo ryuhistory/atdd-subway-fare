@@ -1,6 +1,6 @@
-package nextstep.subway.domain.fee;
+package nextstep.subway.domain.fare;
 
-public class DistanceFeePolicy implements FeePolicy {
+public class DistanceFarePolicy implements FarePolicy {
 
 	private static final long BASIC_FEE = 1250;
 	private static final int BASE_DISTANCE = 10;
@@ -10,7 +10,7 @@ public class DistanceFeePolicy implements FeePolicy {
 
 	private int totalDistance;
 
-	public DistanceFeePolicy(int totalDistance) {
+	public DistanceFarePolicy(int totalDistance) {
 		if (totalDistance <= 0) {
 			throw new IllegalArgumentException("지하철 이동거리가 잘못되었습니다.");
 		}
