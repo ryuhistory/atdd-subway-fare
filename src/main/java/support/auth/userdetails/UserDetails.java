@@ -3,11 +3,15 @@ package support.auth.userdetails;
 import java.util.List;
 
 public interface UserDetails {
-    Object getUsername();
+	Object getUsername();
 
-    Object getPassword();
+	Object getPassword();
 
-    List<String> getAuthorities();
+	List<String> getAuthorities();
 
-    boolean checkCredentials(Object credentials);
+	boolean checkCredentials(Object credentials);
+
+	boolean isTeenager();
+
+	boolean isChildren();
 }
