@@ -49,7 +49,7 @@ class LineServiceTest {
 	}
 
 	private Line createLine(Station 강남역, Station 역삼역) {
-		Line line = new Line("2호선", "green", false);
+		Line line = new Line("2호선", "green", 0);
 		line.addSection(강남역, 역삼역, 10, 5);
 		return line;
 	}

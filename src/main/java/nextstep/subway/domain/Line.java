@@ -15,7 +15,7 @@ public class Line {
 	private Long id;
 	private String name;
 	private String color;
-	private boolean isAdditionalFeeLine;
+	private int additionalFee;
 
 	@Embedded
 	private Sections sections = new Sections();
@@ -23,9 +23,10 @@ public class Line {
 	public Line() {
 	}
 
-	public Line(String name, String color, boolean isAdditionalFeeLine) {
+	public Line(String name, String color, int additionalFee) {
 		this.name = name;
 		this.color = color;
+		this.additionalFee = additionalFee;
 	}
 
 	public Long getId() {
@@ -40,20 +41,22 @@ public class Line {
 		return color;
 	}
 
+	public int getAdditionalFee() {
+		return additionalFee;
+	}
+
 	public List<Section> getSections() {
 		return sections.getSections();
 	}
 
-	public void update(String name, String color, Boolean isAdditionalFeeLine) {
+	public void update(String name, String color, int additionalFee) {
 		if (name != null) {
 			this.name = name;
 		}
 		if (color != null) {
 			this.color = color;
 		}
-		if (isAdditionalFeeLine != null) {
-			this.isAdditionalFeeLine = isAdditionalFeeLine;
-		}
+		this.additionalFee = additionalFee;
 	}
 
 	public void addSection(Station upStation, Station downStation, int distance, int duration) {

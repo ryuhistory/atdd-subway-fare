@@ -20,7 +20,7 @@ class LineAcceptanceTest extends AcceptanceTest {
 	@Test
 	void createLine() {
 		// when
-		ExtractableResponse<Response> response = 지하철_노선_생성_요청(관리자, "2호선", "green", "true");
+		ExtractableResponse<Response> response = 지하철_노선_생성_요청(관리자, "2호선", "green", 0);
 
 		// then
 		assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
@@ -38,8 +38,8 @@ class LineAcceptanceTest extends AcceptanceTest {
 	@Test
 	void getLines() {
 		// given
-		지하철_노선_생성_요청(관리자, "2호선", "green", "false");
-		지하철_노선_생성_요청(관리자, "3호선", "orange", "false");
+		지하철_노선_생성_요청(관리자, "2호선", "green", 0);
+		지하철_노선_생성_요청(관리자, "3호선", "orange", 0);
 
 		// when
 		ExtractableResponse<Response> response = 지하철_노선_목록_조회_요청();
@@ -58,7 +58,7 @@ class LineAcceptanceTest extends AcceptanceTest {
 	@Test
 	void getLine() {
 		// given
-		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", "false");
+		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", 0);
 
 		// when
 		ExtractableResponse<Response> response = 지하철_노선_조회_요청(createResponse);
@@ -70,22 +70,42 @@ class LineAcceptanceTest extends AcceptanceTest {
 
 	/**
 	 * Given 지하철 노선을 생성하고
-	 * When 생성한 지하철 노선을 수정하면
-	 * Then 해당 지하철 노선 정보는 수정된다
+	 * When 생성한 지하철 노선의 색상을 수정하면
+	 * Then 해당 지하철 노선의 색상 정보는 수정된다
 	 */
-	@DisplayName("지하철 노선 수정")
+	@DisplayName("지하철 노선 색상 수정")
 	@Test
-	void updateLine() {
+	void updateLineOfColor() {
 		// given
-		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", "false");
+		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", 0);
 
 		// when
-		지하철_노선_수정_요청(관리자, createResponse.header("location"));
+		지하철_노선_수정_요청_색상(관리자, createResponse.header("location"));
 
 		// then
 		ExtractableResponse<Response> response = 지하철_노선_조회_요청(createResponse);
 		assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
 		assertThat(response.jsonPath().getString("color")).isEqualTo("red");
+	}
+
+	/**
+	 * Given 지하철 노선을 생성하고
+	 * When 생성한 지하철 노선의 추가구간요금 정보를 수정하면
+	 * Then 해당 지하철 노선의 추가구간요금 정보는  정보는 수정된다
+	 */
+	@DisplayName("지하철 노선 추가금액 수정")
+	@Test
+	void updateLineOfAdditionalFee() {
+		// given
+		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", 0);
+
+		// when
+		지하철_노선_수정_요청_추가요금(관리자, createResponse.header("location"));
+
+		// then
+		ExtractableResponse<Response> response = 지하철_노선_조회_요청(createResponse);
+		assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+		assertThat(response.jsonPath().getInt("additionalFee")).isEqualTo(500);
 	}
 
 	/**
@@ -97,7 +117,7 @@ class LineAcceptanceTest extends AcceptanceTest {
 	@Test
 	void deleteLine() {
 		// given
-		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", "false");
+		ExtractableResponse<Response> createResponse = 지하철_노선_생성_요청(관리자, "2호선", "green", 0);
 
 		// when
 		ExtractableResponse<Response> response = 지하철_노선_삭제_요청(관리자, createResponse.header("location"));

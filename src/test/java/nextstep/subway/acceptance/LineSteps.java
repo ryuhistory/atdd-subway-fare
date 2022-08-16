@@ -10,11 +10,11 @@ import io.restassured.response.Response;
 
 public class LineSteps extends AcceptanceTestSteps {
 	public static ExtractableResponse<Response> 지하철_노선_생성_요청(String token, String name, String color,
-		String isAdditionalFeeLine) {
-		Map<String, String> params = new HashMap<>();
+		int additionalFee) {
+		Map<String, Object> params = new HashMap<>();
 		params.put("name", name);
 		params.put("color", color);
-		params.put("isAdditionalFeeLine", isAdditionalFeeLine);
+		params.put("additionalFee", additionalFee);
 		return given(token)
 			.body(params)
 			.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -48,9 +48,20 @@ public class LineSteps extends AcceptanceTestSteps {
 			.then().log().all().extract();
 	}
 
-	public static ExtractableResponse<Response> 지하철_노선_수정_요청(String token, String location) {
+	public static ExtractableResponse<Response> 지하철_노선_수정_요청_색상(String token, String location) {
 		Map<String, String> params = new HashMap<>();
 		params.put("color", "red");
+		return given(token)
+			.body(params)
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.when().put(location)
+			.then().log().all().extract();
+	}
+
+	public static ExtractableResponse<Response> 지하철_노선_수정_요청_추가요금(String token, String location) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("additionalFee", 500 + "");
+
 		return given(token)
 			.body(params)
 			.contentType(MediaType.APPLICATION_JSON_VALUE)

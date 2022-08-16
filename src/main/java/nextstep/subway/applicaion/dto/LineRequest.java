@@ -7,7 +7,7 @@ public class LineRequest {
 	private Long downStationId;
 	private int distance;
 	private int duration;
-	private Boolean isAdditionalFeeLine;
+	private int additionalFee;
 
 	public String getName() {
 		return name;
@@ -33,7 +33,7 @@ public class LineRequest {
 		return duration;
 	}
 
-	public Boolean getIsAdditionalFeeLine() {
-		return isAdditionalFeeLine;
+	public int getAdditionalFee() {
+		return additionalFee;
 	}
 }
