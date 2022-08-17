@@ -25,7 +25,7 @@ public class PathResponse {
 		int distance = path.extractDistance();
 		int duration = path.extractDuration();
 
-		return new PathResponse(stations, distance, duration, path.getFee());
+		return new PathResponse(stations, distance, duration, path.getFare());
 	}
 
 	public List<StationResponse> getStations() {

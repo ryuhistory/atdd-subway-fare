@@ -19,7 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) {
 		Member member = memberRepository.findByEmail(email).orElseThrow(RuntimeException::new);
-		return new User(member.getEmail(), member.getPassword(), member.getRoles(), member.isTeenager(),
-			member.isChildren());
+		return new User(member.getEmail(), member.getPassword(), member.getRoles());
 	}
 }

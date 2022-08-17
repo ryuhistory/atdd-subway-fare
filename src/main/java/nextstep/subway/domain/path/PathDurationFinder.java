@@ -8,7 +8,6 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import nextstep.subway.domain.Line;
-import nextstep.subway.domain.Path;
 import nextstep.subway.domain.Section;
 import nextstep.subway.domain.Sections;
 import nextstep.subway.domain.Station;
@@ -21,7 +20,7 @@ public class PathDurationFinder implements PathFinder {
 	}
 
 	@Override
-	public Path findPath(Station source, Station target) {
+	public Sections findPath(Station source, Station target) {
 		SimpleDirectedWeightedGraph<Station, SectionEdge> graph = new SimpleDirectedWeightedGraph<>(SectionEdge.class);
 		addVertex(graph);
 		addEdge(graph);
@@ -33,7 +32,7 @@ public class PathDurationFinder implements PathFinder {
 		List<Section> sections = result.getEdgeList().stream()
 			.map(it -> it.getSection())
 			.collect(Collectors.toList());
-		return new Path(new Sections(sections));
+		return new Sections(sections);
 	}
 
 	// 지하철 역(정점)을 등록

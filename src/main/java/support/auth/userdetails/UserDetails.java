@@ -11,7 +11,4 @@ public interface UserDetails {
 
 	boolean checkCredentials(Object credentials);
 
-	boolean isTeenager();
-
-	boolean isChildren();
 }

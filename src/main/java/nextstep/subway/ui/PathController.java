@@ -10,6 +10,8 @@ import com.sun.istack.NotNull;
 import nextstep.subway.applicaion.PathService;
 import nextstep.subway.applicaion.dto.PathResponse;
 import nextstep.subway.domain.path.PathBaseCode;
+import support.auth.authorization.AuthenticationPrincipal;
+import support.auth.userdetails.User;
 
 @RestController
 public class PathController {
@@ -22,8 +24,9 @@ public class PathController {
 	@GetMapping("/paths")
 	public ResponseEntity<PathResponse> findPath(@RequestParam Long source
 		, @RequestParam Long target
-		, @RequestParam @NotNull PathBaseCode pathBaseCode) {
-		return ResponseEntity.ok(pathService.findPath(source, target, pathBaseCode));
+		, @RequestParam @NotNull PathBaseCode pathBaseCode
+		, @AuthenticationPrincipal User user) {
+		return ResponseEntity.ok(pathService.findPath(source, target, pathBaseCode, user.getUsername()));
 	}
 
 }

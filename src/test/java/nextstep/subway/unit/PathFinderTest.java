@@ -57,7 +57,7 @@ public class PathFinderTest {
 		PathFinder pathFinder = new PathDistanceFinder(lines);
 
 		// when
-		Path path = pathFinder.findPath(교대역, 양재역);
+		Path path = new Path(pathFinder.findPath(교대역, 양재역), false, false);
 
 		// then
 		assertThat(path.getStations()).containsExactlyElementsOf(Lists.newArrayList(교대역, 강남역, 양재역));
@@ -70,7 +70,7 @@ public class PathFinderTest {
 		PathFinder pathFinder = new PathDistanceFinder(lines);
 
 		// when
-		Path path = pathFinder.findPath(양재역, 교대역);
+		Path path = new Path(pathFinder.findPath(교대역, 양재역), false, false);
 
 		// then
 		assertThat(path.getStations()).containsExactlyElementsOf(Lists.newArrayList(양재역, 강남역, 교대역));
@@ -83,8 +83,8 @@ public class PathFinderTest {
 		PathFinder pathFinder = new PathDurationFinder(lines);
 
 		// when
-		Path path = pathFinder.findPath(교대역, 양재역);
-
+		Path path = new Path(pathFinder.findPath(교대역, 양재역), false, false);
+		path.getStations().forEach(s -> System.out.println(s.getName()));
 		// then
 		assertThat(path.getStations()).containsExactlyElementsOf(Lists.newArrayList(교대역, 남부터미널역, 양재역));
 	}
@@ -96,8 +96,8 @@ public class PathFinderTest {
 		PathFinder pathFinder = new PathDurationFinder(lines);
 
 		// when
-		Path path = pathFinder.findPath(양재역, 교대역);
-
+		Path path = new Path(pathFinder.findPath(교대역, 양재역), false, false);
+		path.getStations().forEach(s -> System.out.println(s.getName()));
 		// then
 		assertThat(path.getStations()).containsExactlyElementsOf(Lists.newArrayList(양재역, 남부터미널역, 교대역));
 	}
